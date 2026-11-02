@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown to 21 March 2035</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #111;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+
+    #countdown {
+        text-align: center;
+    }
+
+    .time {
+        font-size: 4rem;
+        font-weight: bold;
+    }
+
+    .label {
+        font-size: 1.2rem;
+        opacity: 0.8;
+    }
+</style>
+</head>
+<body>
+
+<div id="countdown">
+    <div class="time">Loading...</div>
+    <div class="label">Until 21 March 2035</div>
+</div>
+
+<script>
+function updateCountdown() {
+    const target = new Date(2036, 2, 21, 0, 0, 0); // 21 Mar 2036
+    const now = new Date();
+
+    let diff = target - now;
+
+    if (diff <= 0) {
+        document.querySelector('.time').textContent = "00:00:00:00";
+        document.querySelector('.label').textContent = "Countdown Complete";
+        return;
+    }
+
+    const days = Math.floor(diff / 86400000);
+    diff %= 86400000;
+
+    const hours = Math.floor(diff / 3600000);
+    diff %= 3600000;
+
+    const minutes = Math.floor(diff / 60000);
+    diff %= 60000;
+
+    const seconds = Math.floor(diff / 1000);
+
+    document.querySelector('.time').textContent =
+        `${days}d ${hours.toString().padStart(2,'0')}h ` +
+        `${minutes.toString().padStart(2,'0')}m ` +
+        `${seconds.toString().padStart(2,'0')}s`;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
